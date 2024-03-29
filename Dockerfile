@@ -1,5 +1,5 @@
 # Use a base image with JDK and Maven installed
-FROM adoptopenjdk:11-jdk-hotspot AS build
+FROM maven:3.8.4-openjdk-11 AS build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -27,4 +27,3 @@ COPY --from=build /app/target/*.jar app.jar
 
 # Specify the command to run the application
 CMD ["java", "-jar", "app.jar"]
-
