@@ -1,1 +1,24 @@
-spring.application.name=Movie Streaming
+spring:
+  application:
+    name: Movie Streaming
+  datasource:
+    url: jdbc:postgresql://${RDS_HOSTNAME:localhost}:${RDS_PORT:5432}/${RDS_DB_NAME:Quiz}
+    username: postgres  # Use environment variable for username
+    password: Varun@008  # Use environment variable for password
+    driver-class-name: org.postgresql.Driver  # JDBC driver class for PostgreSQL
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgreSQL
+    hibernate:
+      ddl-auto: update  # Automatic schema update mode (can be set to 'create-drop', 'update', 'validate', 'none')
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true  # Resolve issue with LOB handling
+  flyway:
+    baselineOnMigrate: true
+  pool:
+    max-size: 5
+    max-idle-time: 15m
+    initial-size: 5
+    validation-query: SELECT 1
